@@ -1,0 +1,74 @@
+what is meant by middleware?
+--------------------------------
+Middleware is acts inbetween the browser and db server
+middleware consist of webserver and application
+It work for request from the browser to interact with the user by response 
+Tomcat Websphere weblogic jboss
+
+What is meant by application server and Web Server
+---------------------------------------------------
+Application server:
+this is used for business logic in which the request is process to get the response from the DB server
+Web server:
+This is used for static page
+
+
+What is meant by three tier architecture?
+-----------------------------------------------
+webserver --> application server --> database server
+
+What is meant by two tier architecture?
+-----------------------------------------
+browser --> DB server
+
+what is war files?
+-------------------
+War files is placed in webserver it holds the static page
+
+What is ear jar files?
+---------------------------
+Enterprise application archieve it is used for packing a modules into single archieve
+Java application archieve -> it consist of java files supportive files used of many files into one
+jar files is placed in the top of ear files
+
+
+what is meant by cluster?
+--------------------------
+Cluster consist of multiple server in which it can be interact with every one 
+the member in a group work for the request came from the user to achieve the data efficiently
+
+
+what is meant by high availability?
+--------------------------------------
+High availability is defined as concept of having a backup which is connect with the group member 
+it closely connected to the heart rate and if takes the request from the member which is totally outstate to communicate
+so for that purpose we are achieving the high availability
+
+
+what is the node?
+-------------------
+node is a point
+
+What is nodeAgent?
+---------------------
+collection of all details about the node
+it allocates the updated work for the node
+
+what is DeploymentManager?
+---------------------------
+The DPMG is used for providing the new things for the nodes 
+the node consist of latest things to work for the process given by the user
+
+
+What is LDAP server?
+---------------------
+LightWeight Directory access protocols
+this is used for access the application server for authorized person along with the user credentials
+
+
+DMGR will directly intreact with 
+---------------------------------
+Standalone application
+Enterprise application -> Node Agent will takes place in enterprise edition      
+
+Federate means configurations                          
