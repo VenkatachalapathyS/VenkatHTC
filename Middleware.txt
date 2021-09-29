@@ -71,4 +71,6 @@ DMGR will directly intreact with
 Standalone application
 Enterprise application -> Node Agent will takes place in enterprise edition      
 
-Federate means configurations                          
+Federate means configurations               
+
+Mq is messaging queue which is used for  the purpose of transfering from application server to another application server
