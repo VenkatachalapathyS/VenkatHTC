@@ -76,3 +76,5 @@ Federate means configurations
 Mq is messaging queue which is used for  the purpose of transfering from application server to another application server
 
 QMGR -> Queuing Manager 
+channels
+Lissener
