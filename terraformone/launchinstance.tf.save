@@ -1,0 +1,10 @@
+provider "aws" {
+	region = "us-west-1a"
+}
+
+resource "aws_ec2_instance" "venkatinstall" {
+	instance_type = "t2.micro"
+	ami = "ami-03ab7423a204da002"
+	associate_public_ip_address = "false"
+	count = 1
+}
