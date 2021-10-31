@@ -1,6 +1,3 @@
-variable "tags" {
-	default = terraform.workspace
-}
 provider "aws" { 
 	region = "us-west-1"
 }
@@ -11,13 +8,9 @@ provider "aws" {
 #	instance_id = "${aws_instance.venkatinstance.id}"
 #}
 
-#locals {
-#	certlist = split("\n", file("./venkat")) 
-#	type = map.certlist
-#}
-#output "certlist" {
-#	value = local.certlist
-#}
+locals {
+	instance_name = split("\n", file("./venkat")) 
+}
 
 resource "null_resource" "venkat"{
 	provisioner "local-exec" {
@@ -32,8 +25,9 @@ resource "aws_instance" "venkatinstance" {
 	key_name = "DockerContainer"
 	vpc_security_group_ids = ["sg-0126be558371393a3"]
 	subnet_id = "subnet-87f159dd"
+	for_each = toset(local.instance_name)
 	tags = {
-		name = var.tags_default	
+		name = each.key
 	}
 	root_block_device { 
 		volume_size = "20"
@@ -48,9 +42,6 @@ resource "aws_instance" "venkatinstance" {
 	}
 
 	associate_public_ip_address = "true"
-#	provisioner "file" {  
-#		source = "venkat"
-#	}
 	
 	#connection {
 	#	type = "ssh"
@@ -69,11 +60,7 @@ resource "aws_instance" "venkatinstance" {
 	#		"cat /etc/fstab"
 	#	]
 	#}
-}
-#	data "tfe_workspace_ids" "all" {
-#		names = "$(terraform.workspace)"
-#		organization = "all"
-#	}
+}}
 
 
 
