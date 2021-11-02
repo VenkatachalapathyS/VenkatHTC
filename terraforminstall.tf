@@ -8,15 +8,25 @@ provider "aws" {
 #	instance_id = "${aws_instance.venkatinstance.id}"
 #}
 
-locals {
-	instance_name = split("\n", file("./venkat")) 
-}
+#locals {
+#	instance_name = split("\n", file("./venkat")) 
+#}
 
-resource "null_resource" "venkat"{
-	provisioner "local-exec" {
-		command = "terraform workspace list > venkat"
-		interpreter = ["bash", "-c"]
-	}
+#resource "null_resource" "venkat"{
+#	provisioner "local-exec" {
+#		command = <<EOT
+#		"terraform workspace list | sed 's/ //g' | sed 's/*//g' | sed '/^$/d' > venkat",
+#		"cat venkat | sed 's/ //g'" 
+#		EOT
+#		interpreter = ["bash", "-c"]
+#	}
+	
+#}
+
+locals {
+	instance_name = split("\n", file("./venkat"))
+	#for_each = toset(local.instance_name)
+	#instances = trimspace("","${local.instance_name}")
 }
 
 resource "aws_instance" "venkatinstance" {
@@ -27,7 +37,7 @@ resource "aws_instance" "venkatinstance" {
 	subnet_id = "subnet-87f159dd"
 	for_each = toset(local.instance_name)
 	tags = {
-		name = each.value
+		name = each.key
 	}
 	root_block_device { 
 		volume_size = "20"
@@ -61,6 +71,20 @@ resource "aws_instance" "venkatinstance" {
 	#	]
 	#}
 }
-
-
+resource "aws_lb_target_group" "VenkatTG" {
+	health_check {
+		interval = 10
+		path = "/"
+		protocol = "HTTP"
+		timeout = 5
+		healthy_threshold = 2
+	}
+		for_each = toset(local.instance_name)
+		tags = { name = each.key }
+		#name = "${aws_instance.venkatinstance[each.key]}"
+		port = 80
+		protocol = "HTTP"
+		target_type = "instance"
+		vpc_id = "vpc-0f1dbf69"
+}
 
